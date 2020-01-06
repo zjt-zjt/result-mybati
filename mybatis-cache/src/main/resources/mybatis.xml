@@ -1,0 +1,41 @@
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"></properties>
+
+    <settings>
+        <!-- 开启将数据库中下划线连接的字段自动映射为Java的小驼峰命名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 指定本地（一级）缓存的范围，默认是SESSION，同一个SqlSession对象执行同一个SQL会命中缓存 -->
+        <!-- STATEMENT代表只有本次执行的语句范围有效，其实就是禁用了一级缓存 -->
+       <!-- <setting name="localCacheScope" value="STATEMENT"/>-->
+        <!-- 打开全局二级缓存开关 -->
+        <!--<setting name="cacheEnabled" value="true"/>-->
+    </settings>
+
+
+    <typeAliases>
+        <!-- 单个类配置别名 -->
+              <!--  <typeAlias type="com.lanou.mybatis.bean.Student" alias="Student" />-->
+        <package name="com.lanou.bean" />
+
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.user}" />
+                <property name="password" value="${jdbc.password}" />
+                <property name="driver" value="${jdbc.driver}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+
+
+    <mappers>
+        <mapper resource="BookMapper.xml"/>
+    </mappers>
+</configuration>

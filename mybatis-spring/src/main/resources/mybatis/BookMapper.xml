@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mybatis.spring.mapper.BookMapper">
+  <resultMap id="BaseResultMap" type="com.lanou.mybatis.spring.bean.Book">
+    <result column="book_no" jdbcType="VARCHAR" property="bookNo" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="book_type" jdbcType="VARCHAR" property="bookType" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="publish_date" jdbcType="DATE" property="publishDate" />
+    <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lanou.mybatis.spring.bean.Book">
+    insert into book (book_no, book_name, book_type, 
+      author, publish_date, book_cover, 
+      stock)
+    values (#{bookNo,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, #{bookType,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{publishDate,jdbcType=DATE}, #{bookCover,jdbcType=VARCHAR}, 
+      #{stock,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select book_no, book_name, book_type, author, publish_date, book_cover, stock
+    from book
+  </select>
+</mapper>

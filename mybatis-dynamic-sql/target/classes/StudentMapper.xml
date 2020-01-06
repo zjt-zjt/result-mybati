@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanousql.Mymapper.mapperdao">
+
+    <!--<select id="queryAllUserByCondition" resultType="student">
+        SELECT * from student
+        <where>
+            <if test="id != null">
+               id = #{id}
+            </if>
+            <if test="name != null">
+                and name like #{name};
+            </if>
+
+            <if test="num != null">
+                and num = #{num};
+            </if>
+        </where>
+    </select>-->
+
+   <!-- <select id="queryAllUserByCondition" resultType="student">
+        SELECT * from student
+        <where>
+            <choose>
+                <when test="name != null">
+                   name like #{name}
+                </when>
+                <when test="num != null">
+                    and num = #{num}
+                </when>
+                <otherwise>
+                    and id =2
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+-->
+
+    <!--<select id="queryUserByIn" resultType="student">
+        select * from student where id
+        <foreach collection="list" item="val" open="in (" close=")" separator=",">
+            #{val}
+        </foreach>
+    </select>-->
+
+   <!-- <insert id="batchInsertByDynamicSql">
+        insert  into  student(num,name,age)
+        values
+        <foreach collection="list" item="student" separator="," >
+           ( #{student.num}, #{student.name}, #{student.age})
+        </foreach>
+    </insert>
+-->
+     <insert id="insertByExecutorBatch" >
+          insert  into  student(name,age)
+         values
+        (  #{name}, #{age})
+     </insert>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.BookMapper">
+
+
+    <resultMap id="bookMap" type="book" >
+        <result column="book_no" jdbcType="VARCHAR" property="bookNo" />
+        <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+        <result column="book_type" jdbcType="VARCHAR" property="bookType" />
+        <result column="author" jdbcType="VARCHAR" property="author" />
+        <result column="stock" jdbcType="INTEGER" property="stock" />
+       <!-- <result column="publish_date" jdbcType="DATE" property="publishDate" />
+        <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+        <result column="stock" jdbcType="INTEGER" property="stock" />-->
+    </resultMap>
+    <update id="updateBook">
+      update book set book_name = "三国" where stock = 1
+    </update>
+
+    <!-- 默认的为本地缓存（一级缓存）后面加上flushCache="true"清空本地缓存，每次都会重新查询数据库
+    或者不再共用一个缓存-->
+    <select id="queryAll" resultType="com.lanou.bean.Book" >
+        select *from book
+    </select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mybatis.mapperTest.TestMapper">
+
+    <resultMap id="TeacherMap" type="teacher">
+        <id column="id" property="id"></id>
+        <result column="tname" property="tname" />
+        <result column="tsex" property="tsex" />
+        <!--<association property="students" javaType="student" resultMap="studentMap"/>-->
+        <!-- 一对多映射关系 -->
+        <collection property="students" ofType="student" resultMap="studentMap"  />
+    </resultMap>
+
+    <resultMap id="studentMap" type="student">
+        <id column="sid" property="sid"></id>
+       <!-- <result column="id" property="id"></result>-->
+        <result column="sname" property="sname" />
+        <result column="ssex" property="ssex" />
+        <result column="sage" property="sage" />
+    </resultMap>
+
+    <!--上面column中的值相当于下面sql语句中起的别名，如果没有别名则为数据库中的名字-->
+    <select id="findByTId" resultMap="TeacherMap">
+       SELECT
+          t.id id,
+          t.tname tname,
+          t.tsex tsex,
+          s.sid sid,
+          s.sname sname,
+          s.ssex ssex,
+          s.sage sage
+        FROM
+         teacher1 t
+        LEFT JOIN student1 s  ON t.id = s.id
+       where
+       t.id=#{id}
+    </select>
+
+
+
+
+
+
+
+</mapper>
